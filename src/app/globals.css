@@ -103,6 +103,50 @@ a {
   mix-blend-mode: multiply;
 }
 
+@keyframes mark-sway {
+  0%,
+  100% {
+    transform: rotate(-2deg) translateY(0);
+  }
+  50% {
+    transform: rotate(2.5deg) translateY(-4px);
+  }
+}
+
+@keyframes orb-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate(12px, -10px) scale(1.08);
+    opacity: 1;
+  }
+}
+
+.mark-sway {
+  transform-origin: 40px 240px;
+  animation: mark-sway 9s ease-in-out infinite;
+}
+
+.mark-sway-delay {
+  transform-origin: 160px 250px;
+  animation: mark-sway 11s ease-in-out infinite 1.2s;
+}
+
+.atmosphere-orb {
+  animation: orb-drift 14s ease-in-out infinite;
+}
+
+.atmosphere-orb-delay {
+  animation: orb-drift 16s ease-in-out infinite 2s;
+}
+
+.journey-wash {
+  transform-origin: left center;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -111,5 +155,12 @@ a {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .mark-sway,
+  .mark-sway-delay,
+  .atmosphere-orb,
+  .atmosphere-orb-delay {
+    animation: none !important;
   }
 }

@@ -10,6 +10,8 @@ export type Experience = {
   packagePriceCents: number;
   ages: string;
   duration: string;
+  capacity: string;
+  includes: string[];
 };
 
 export const EXPERIENCES: Experience[] = [
@@ -23,7 +25,9 @@ export const EXPERIENCES: Experience[] = [
     accentSoft: "#E8EDE4",
     packagePriceCents: 42500,
     ages: "Ages 5–10",
-    duration: "3-hour adventure",
+    duration: "3 hours",
+    capacity: "Up to 10 kids",
+    includes: ["Field stations", "Specimen kits", "Journals"],
   },
   {
     id: "spy-academy",
@@ -35,7 +39,9 @@ export const EXPERIENCES: Experience[] = [
     accentSoft: "#E3EBF0",
     packagePriceCents: 45000,
     ages: "Ages 6–11",
-    duration: "3-hour mission",
+    duration: "3 hours",
+    capacity: "Up to 10 kids",
+    includes: ["Mission brief", "Code kits", "Disguises"],
   },
   {
     id: "dino-dig",
@@ -47,7 +53,9 @@ export const EXPERIENCES: Experience[] = [
     accentSoft: "#F3E8DF",
     packagePriceCents: 47500,
     ages: "Ages 4–9",
-    duration: "3-hour dig",
+    duration: "3 hours",
+    capacity: "Up to 8 kids",
+    includes: ["Dig site", "Fossil finds", "Tools"],
   },
   {
     id: "potion-lab",
@@ -59,7 +67,9 @@ export const EXPERIENCES: Experience[] = [
     accentSoft: "#EDE6F3",
     packagePriceCents: 45000,
     ages: "Ages 5–10",
-    duration: "3-hour lab",
+    duration: "3 hours",
+    capacity: "Up to 10 kids",
+    includes: ["Lab bench", "Safe reagents", "Take-home vial"],
   },
 ];
 

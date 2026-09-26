@@ -151,7 +151,10 @@ export function BookingWizard() {
                           {exp.name}
                         </span>
                         <span className="mt-2 block text-xs text-muted">
-                          {exp.ages} · {formatUsd(exp.packagePriceCents)}
+                          {exp.ages} · {exp.duration} · {formatUsd(exp.packagePriceCents)}
+                        </span>
+                        <span className="mt-1 block text-[11px] text-muted/80">
+                          {exp.capacity} · {exp.includes.slice(0, 2).join(" · ")}
                         </span>
                       </button>
                     );
@@ -334,7 +337,10 @@ export function BookingWizard() {
                 {experience.blurb}
               </p>
               <p className="mt-4 text-xs text-muted">
-                {experience.ages} · {experience.duration}
+                {experience.ages} · {experience.duration} · {experience.capacity}
+              </p>
+              <p className="mt-1 text-[11px] text-muted/80">
+                Includes {experience.includes.join(" · ")}
               </p>
             </>
           ) : (
