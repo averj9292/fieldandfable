@@ -24,6 +24,12 @@ export function SiteFooter() {
             {SITE.name}
           </p>
           <p className="mt-1 text-xs text-muted">{SITE.region}</p>
+          <a
+            href={SITE.url}
+            className="mt-1 inline-block text-xs text-olive underline-offset-2 hover:underline"
+          >
+            {SITE.urlHost}
+          </a>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-5 text-[10px] tracked text-muted">
           <Link href="/booking" className="hover:text-ink">
@@ -35,6 +41,9 @@ export function SiteFooter() {
           <Link href="/contact" className="hover:text-ink">
             Contact
           </Link>
+          <a href={SITE.url} className="hover:text-ink">
+            {SITE.urlHost}
+          </a>
           <a href={`tel:${SITE.phoneTel}`} className="hover:text-ink">
             {SITE.phone}
           </a>

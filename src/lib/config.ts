@@ -2,7 +2,9 @@
 export const SITE = {
   name: "Field & Fable",
   tagline: "Immersive birthday experiences for curious kids",
-  email: "hello@fieldandfable.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://fieldandfable.ca",
+  urlHost: "fieldandfable.ca",
+  email: "hello@fieldandfable.ca",
   phone: "249-387-0252",
   phoneTel: "2493870252",
   region: "Kingston and surrounding area",

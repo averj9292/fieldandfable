@@ -20,11 +20,15 @@ const sans = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE.url),
   title: {
     default: `${SITE.name} · Immersive birthday experiences`,
     template: `%s · ${SITE.name}`,
   },
   description: SITE.tagline,
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({

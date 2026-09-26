@@ -110,6 +110,10 @@ export function BookingWizard() {
           <a href={`tel:${SITE.phoneTel}`} className="text-olive underline-offset-2 hover:underline">
             {SITE.phone}
           </a>
+          , or visit{" "}
+          <a href={SITE.url} className="text-olive underline-offset-2 hover:underline">
+            {SITE.urlHost}
+          </a>
           .
         </p>
       </FadeIn>

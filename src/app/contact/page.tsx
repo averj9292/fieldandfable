@@ -29,6 +29,14 @@ export default function ContactPage() {
           </p>
           <dl className="mt-10 space-y-4 text-sm text-muted">
             <div>
+              <dt className="tracked text-[10px] text-olive">Website</dt>
+              <dd className="mt-1">
+                <a href={SITE.url} className="hover:text-ink">
+                  {SITE.urlHost}
+                </a>
+              </dd>
+            </div>
+            <div>
               <dt className="tracked text-[10px] text-olive">Email</dt>
               <dd className="mt-1">
                 <a href={`mailto:${SITE.email}`} className="hover:text-ink">
