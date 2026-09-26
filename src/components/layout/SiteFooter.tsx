@@ -19,9 +19,12 @@ export function SiteFooter() {
       </div>
 
       <div className="relative z-[1] mx-auto mt-10 flex max-w-6xl flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
-        <p className="font-[family-name:var(--font-serif)] text-lg text-ink">
-          {SITE.name}
-        </p>
+        <div>
+          <p className="font-[family-name:var(--font-serif)] text-lg text-ink">
+            {SITE.name}
+          </p>
+          <p className="mt-1 text-xs text-muted">{SITE.region}</p>
+        </div>
         <div className="flex flex-wrap items-center justify-center gap-5 text-[10px] tracked text-muted">
           <Link href="/booking" className="hover:text-ink">
             Book
@@ -32,6 +35,9 @@ export function SiteFooter() {
           <Link href="/contact" className="hover:text-ink">
             Contact
           </Link>
+          <a href={`tel:${SITE.phoneTel}`} className="hover:text-ink">
+            {SITE.phone}
+          </a>
           <a href={`mailto:${SITE.email}`} className="hover:text-ink">
             {SITE.email}
           </a>

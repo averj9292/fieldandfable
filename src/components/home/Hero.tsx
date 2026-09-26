@@ -3,6 +3,7 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/Button";
+import { SITE } from "@/lib/config";
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -32,7 +33,7 @@ export function Hero() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="tracked mb-4 text-[10px] font-medium text-olive md:text-[11px]"
         >
-          Immersive worlds · Delivered to you
+          Made by moms · {SITE.region}
         </motion.p>
         <motion.h1
           initial={reduce ? false : { opacity: 0, y: 32 }}
@@ -48,8 +49,10 @@ export function Hero() {
           transition={{ duration: 0.85, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
           className="mt-6 max-w-md font-[family-name:var(--font-serif)] text-lg leading-relaxed text-muted md:text-xl"
         >
-          We deliver, set up, and collect immersive birthday worlds — so kids can
-          explore, invent, and wonder while you host the celebration.
+          We were tired of the same party formulas. So we built immersive birthday
+          worlds that feel unique, look beautiful, and stay simple to set up. We
+          deliver, style, and collect across {SITE.region}, so your kids can wonder
+          while you actually host.
         </motion.p>
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 18 }}

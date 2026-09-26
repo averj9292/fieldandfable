@@ -3,6 +3,7 @@ import { FadeIn } from "@/components/motion/FadeIn";
 import { RevealJourney } from "@/components/home/RevealJourney";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Button } from "@/components/ui/Button";
+import { SITE } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "About",
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 const VALUES = [
   {
     title: "Wonder over spectacle",
-    body: "Experiences are built for curiosity — tools to touch, questions to chase, stories to finish.",
+    body: "Experiences are built for curiosity: tools to touch, questions to chase, stories to finish.",
   },
   {
     title: "Host-light by design",
@@ -30,13 +31,21 @@ export default function AboutPage() {
         <FadeIn>
           <SectionLabel>Our story</SectionLabel>
           <h1 className="mt-8 max-w-3xl font-[family-name:var(--font-serif)] text-4xl font-semibold leading-tight text-ink md:text-5xl">
-            Built for kids who ask better questions.
+            Built by moms, for kids who ask better questions.
           </h1>
           <p className="mt-6 max-w-2xl font-[family-name:var(--font-serif)] text-xl leading-relaxed text-muted">
-            Field &amp; Fable started from a simple belief: birthdays should feel like
-            discovery, not just decoration. We craft immersive worlds — Bug Lab, Spy
-            Academy, Dino Dig, Potion Lab — and bring them to your door so curiosity
-            can take the lead.
+            Field &amp; Fable started around kitchen tables in {SITE.region}. We
+            were tired of the same party formulas and wanted something unique that
+            still felt simple to set up. So we craft immersive worlds (Bug Lab, Spy
+            Academy, Dino Dig, Potion Lab) and bring them to your door, mom to mom,
+            so curiosity can take the lead.
+          </p>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted">
+            Serving {SITE.region}. Call or text{" "}
+            <a href={`tel:${SITE.phoneTel}`} className="text-olive underline-offset-2 hover:underline">
+              {SITE.phone}
+            </a>
+            .
           </p>
         </FadeIn>
 

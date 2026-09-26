@@ -23,8 +23,9 @@ export default function ContactPage() {
             Tell us about the birthday.
           </h1>
           <p className="mt-5 max-w-md font-[family-name:var(--font-serif)] text-lg text-muted">
-            Questions about dates, guest counts, or custom touches? Send a note —
-            we usually reply within one business day.
+            Questions about dates, guest counts, or a custom setup? Send a note.
+            We are moms in {SITE.region}, and we usually reply within one business
+            day.
           </p>
           <dl className="mt-10 space-y-4 text-sm text-muted">
             <div>
@@ -37,7 +38,11 @@ export default function ContactPage() {
             </div>
             <div>
               <dt className="tracked text-[10px] text-olive">Phone</dt>
-              <dd className="mt-1">{SITE.phone}</dd>
+              <dd className="mt-1">
+                <a href={`tel:${SITE.phoneTel}`} className="hover:text-ink">
+                  {SITE.phone}
+                </a>
+              </dd>
             </div>
             <div>
               <dt className="tracked text-[10px] text-olive">Service area</dt>
@@ -51,11 +56,14 @@ export default function ContactPage() {
             <div className="border border-olive/25 bg-sage/30 p-8">
               <p className="tracked text-[10px] text-olive">Received</p>
               <h2 className="mt-3 font-[family-name:var(--font-serif)] text-3xl font-semibold text-ink">
-                Thanks — we&apos;ll be in touch.
+                Thank you. We will be in touch.
               </h2>
               <p className="mt-3 text-sm text-muted">
-                This demo form doesn&apos;t send email yet. Wire a form provider or
-                API route when you&apos;re ready.
+                Prefer to talk it through? Call or text{" "}
+                <a href={`tel:${SITE.phoneTel}`} className="text-olive underline-offset-2 hover:underline">
+                  {SITE.phone}
+                </a>
+                .
               </p>
               <div className="mt-6">
                 <Button href="/booking">Or book now →</Button>

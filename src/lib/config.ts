@@ -1,10 +1,11 @@
-/** Site-wide configurable values. Deposit amount is provisional — tune freely. */
+/** Site-wide configurable values. */
 export const SITE = {
   name: "Field & Fable",
   tagline: "Immersive birthday experiences for curious kids",
   email: "hello@fieldandfable.com",
-  phone: "(555) 014-2200",
-  region: "Local delivery area",
+  phone: "249-387-0252",
+  phoneTel: "2493870252",
+  region: "Kingston and surrounding area",
 } as const;
 
 /** Refundable damage deposit collected with each booking (cents). */

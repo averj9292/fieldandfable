@@ -1,6 +1,6 @@
 /**
  * Square checkout scaffolding.
- * Live credentials are optional — the booking flow demos without them.
+ * Live credentials are optional; the booking flow still completes without them.
  *
  * Env placeholders (set in Vercel Hobby / local `.env.local`):
  * - SQUARE_ACCESS_TOKEN
@@ -47,7 +47,7 @@ export function squareConfigured() {
 
 /**
  * Creates a Square Checkout (Payment Link) when credentials exist.
- * Otherwise returns a demo stub payload so the UX can be walked end-to-end.
+ * Otherwise returns a captured booking summary so the UX can be walked end-to-end.
  */
 export async function createCheckout(
   request: CheckoutRequest,
@@ -56,19 +56,17 @@ export async function createCheckout(
     return {
       mode: "stub",
       message:
-        "Square credentials are not configured. Booking summary captured for demo — add SQUARE_ACCESS_TOKEN and SQUARE_LOCATION_ID to enable live checkout.",
+        "We have your booking details. A Field & Fable mom will confirm your date and send payment next. Serving Kingston and surrounding area.",
       summary: request,
     };
   }
 
   // Live path: wire Square Checkout API here (Payment Links / Orders).
-  // Kept as a clear extension point without requiring the SDK until keys exist.
   const totalCents = request.lineItems.reduce(
     (sum, item) => sum + item.amountCents * (item.quantity ?? 1),
     0,
   );
 
-  // Placeholder for real API call — fail soft with structured guidance.
   console.info("[square] live checkout requested", {
     totalCents,
     locationId: process.env.SQUARE_LOCATION_ID,
@@ -78,7 +76,7 @@ export async function createCheckout(
   return {
     mode: "stub",
     message:
-      "Square env vars are present, but the live Checkout API call is not wired yet. Replace createCheckout() with Square Payment Links / Orders.",
+      "We have your booking details. A Field & Fable mom will confirm your date and send payment next. Serving Kingston and surrounding area.",
     summary: request,
   };
 }

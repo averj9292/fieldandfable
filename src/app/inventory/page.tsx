@@ -4,6 +4,8 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { EXPERIENCES } from "@/lib/experiences";
 import { INVENTORY } from "@/lib/inventory";
 import { Button } from "@/components/ui/Button";
+import { RequestSetupForm } from "@/components/inventory/RequestSetupForm";
+import { SITE } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "Inventory",
@@ -18,8 +20,9 @@ export default function InventoryPage() {
           Everything we bring to the adventure.
         </h1>
         <p className="mt-5 max-w-2xl font-[family-name:var(--font-serif)] text-lg text-muted">
-          Browse the catalog of wearables, tools, and setup pieces that travel with
-          each experience. Exact kits are confirmed when you book.
+          Browse the wearables, tools, and setup pieces that travel with each
+          experience across {SITE.region}. Exact kits are confirmed when you
+          book. Do not see what you need? Request a different setup below.
         </p>
       </FadeIn>
 
@@ -67,6 +70,8 @@ export default function InventoryPage() {
           );
         })}
       </ul>
+
+      <RequestSetupForm />
 
       <FadeIn className="mt-14 flex justify-center">
         <Button href="/booking">Book with these kits →</Button>

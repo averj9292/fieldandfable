@@ -2,12 +2,13 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { SITE } from "@/lib/config";
 
 const STEPS = [
   {
     n: "01",
     title: "Deliver",
-    body: "We bring the full experience to your door — crates, props, and the world they’ll walk into.",
+    body: `We bring the full experience to your door in ${SITE.region}: crates, props, and the world they will walk into.`,
     accent: "var(--sage)",
   },
   {
@@ -19,13 +20,13 @@ const STEPS = [
   {
     n: "03",
     title: "Explore",
-    body: "Kids enter the reveal. Dig, decode, mix, observe — curiosity leads for the whole adventure.",
+    body: "Kids enter the reveal. Dig, decode, mix, observe. Curiosity leads for the whole adventure.",
     accent: "var(--terracotta)",
   },
   {
     n: "04",
     title: "Collect",
-    body: "When the celebration settles, we pack and pick up. You keep the memories; we handle the rest.",
+    body: "When the celebration settles, we pack and pick up. You keep the memories. We handle the rest.",
     accent: "var(--lavender)",
   },
 ];
@@ -62,8 +63,17 @@ export function RevealJourney({
           transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
           className="mt-8 max-w-2xl font-[family-name:var(--font-serif)] text-3xl font-semibold leading-tight text-ink md:text-4xl"
         >
-          From the doorstep to the reveal — then we quietly disappear.
+          From the doorstep to the reveal, then we quietly disappear.
         </motion.h2>
+        <motion.p
+          initial={reduce ? false : { opacity: 0, y: 14 }}
+          whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-4 max-w-xl font-[family-name:var(--font-serif)] text-lg text-muted"
+        >
+          Made by moms who wanted something unique and simple. Serving {SITE.region}.
+        </motion.p>
 
         <ol className="mt-12 grid gap-8 md:mt-16 md:grid-cols-2 md:gap-x-12 md:gap-y-14 lg:grid-cols-4 lg:gap-8">
           {STEPS.map((step, i) => (

@@ -4,12 +4,12 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { EXPERIENCES, formatUsd, getExperience } from "@/lib/experiences";
-import { DAMAGE_DEPOSIT_CENTS, DAMAGE_DEPOSIT_DOLLARS } from "@/lib/config";
+import { DAMAGE_DEPOSIT_CENTS, DAMAGE_DEPOSIT_DOLLARS, SITE } from "@/lib/config";
 import { Button } from "@/components/ui/Button";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { FadeIn } from "@/components/motion/FadeIn";
 
-type StubResult = {
+type CheckoutResult = {
   mode: "stub" | "live";
   message?: string;
   checkoutUrl?: string;
@@ -31,11 +31,11 @@ export function BookingWizard() {
   const [partyDate, setPartyDate] = useState("");
   const [guestName, setGuestName] = useState("");
   const [guestEmail, setGuestEmail] = useState("");
-  const [depositCents, setDepositCents] = useState(DAMAGE_DEPOSIT_CENTS);
+  const [depositCents] = useState(DAMAGE_DEPOSIT_CENTS);
   const [step, setStep] = useState(0);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<StubResult | null>(null);
+  const [result, setResult] = useState<CheckoutResult | null>(null);
 
   const experience = useMemo(
     () => getExperience(experienceId),
@@ -69,12 +69,12 @@ export function BookingWizard() {
             {
               name: "Refundable damage deposit",
               amountCents: depositCents,
-              note: "Refunded after successful pickup",
+              note: "Covers damage to items; refunded after successful pickup",
             },
           ],
         }),
       });
-      const data = (await res.json()) as StubResult & { error?: string };
+      const data = (await res.json()) as CheckoutResult & { error?: string };
       if (!res.ok) {
         setError(data.error ?? "Checkout failed");
         return;
@@ -86,7 +86,7 @@ export function BookingWizard() {
       setResult(data);
       setStep(3);
     } catch {
-      setError("Network error — try again.");
+      setError("Network error. Please try again.");
     } finally {
       setBusy(false);
     }
@@ -100,8 +100,17 @@ export function BookingWizard() {
           Choose the adventure. We handle the rest.
         </h1>
         <p className="mt-5 max-w-2xl font-[family-name:var(--font-serif)] text-lg text-muted">
-          Package price plus a configurable ${DAMAGE_DEPOSIT_DOLLARS} refundable
-          damage deposit. Square checkout is ready to wire when you have keys.
+          Made by moms who wanted birthdays that feel unique and stay simple.
+          We deliver across {SITE.region}. Package price plus a ${DAMAGE_DEPOSIT_DOLLARS}{" "}
+          damage deposit that covers damage to items and is refunded after a
+          successful pickup.
+        </p>
+        <p className="mt-3 text-sm text-muted">
+          Questions? Call or text{" "}
+          <a href={`tel:${SITE.phoneTel}`} className="text-olive underline-offset-2 hover:underline">
+            {SITE.phone}
+          </a>
+          .
         </p>
       </FadeIn>
 
@@ -160,6 +169,13 @@ export function BookingWizard() {
                     );
                   })}
                 </div>
+                <p className="mt-6 text-xs text-muted">
+                  Looking for something else?{" "}
+                  <a href="/inventory#request-setup" className="text-olive underline-offset-2 hover:underline">
+                    Request a different setup
+                  </a>
+                  .
+                </p>
                 <div className="mt-8 flex justify-end">
                   <Button
                     disabled={!experienceId}
@@ -204,30 +220,16 @@ export function BookingWizard() {
                       className="mt-2 w-full border border-ink/15 bg-cream px-3 py-3 text-sm outline-none focus:border-olive"
                     />
                   </label>
-                  <label className="block">
-                    <span className="tracked text-[10px] text-muted">
-                      Damage deposit (refundable)
-                    </span>
-                    <div className="mt-2 flex items-center gap-3">
-                      <span className="text-sm text-muted">$</span>
-                      <input
-                        type="number"
-                        min={0}
-                        step={50}
-                        value={depositCents / 100}
-                        onChange={(e) =>
-                          setDepositCents(
-                            Math.max(0, Math.round(Number(e.target.value) * 100)),
-                          )
-                        }
-                        className="w-full border border-ink/15 bg-cream px-3 py-3 text-sm outline-none focus:border-olive"
-                      />
-                    </div>
-                    <p className="mt-2 text-xs text-muted">
-                      Default ${DAMAGE_DEPOSIT_DOLLARS}. Refunded after successful
-                      pickup. Configurable via env.
+                  <div className="border border-ink/10 bg-cream p-4">
+                    <p className="tracked text-[10px] text-olive">Damage deposit</p>
+                    <p className="mt-2 font-[family-name:var(--font-serif)] text-2xl font-semibold text-ink">
+                      {formatUsd(depositCents)}
                     </p>
-                  </label>
+                    <p className="mt-2 text-xs leading-relaxed text-muted">
+                      This deposit covers damage to items in the experience kit.
+                      It is refunded after kits are picked up in good condition.
+                    </p>
+                  </div>
                 </div>
                 <div className="mt-8 flex justify-between gap-3">
                   <Button variant="ghost" onClick={() => setStep(0)}>
@@ -249,19 +251,15 @@ export function BookingWizard() {
                   Review &amp; pay
                 </h2>
                 <p className="mt-3 text-sm text-muted">
-                  You&apos;ll be sent to Square Checkout when credentials are
-                  configured. Without keys, this demo completes as a stub.
+                  Double-check the details. We serve {SITE.region}.
                 </p>
                 <dl className="mt-6 space-y-3 border border-ink/10 p-5 text-sm">
-                  <Row label="Experience" value={experience?.name ?? "—"} />
-                  <Row label="Date" value={partyDate || "—"} />
+                  <Row label="Experience" value={experience?.name ?? "–"} />
+                  <Row label="Date" value={partyDate || "–"} />
                   <Row label="Guest" value={`${guestName} · ${guestEmail}`} />
+                  <Row label="Package" value={formatUsd(packageCents)} />
                   <Row
-                    label="Package"
-                    value={formatUsd(packageCents)}
-                  />
-                  <Row
-                    label="Damage deposit (refundable)"
+                    label="Damage deposit (covers item damage)"
                     value={formatUsd(depositCents)}
                   />
                   <div className="hairline my-2" />
@@ -285,9 +283,9 @@ export function BookingWizard() {
 
             {step === 3 && result ? (
               <Step key="s3">
-                <p className="tracked text-[10px] text-olive">Demo checkout</p>
+                <p className="tracked text-[10px] text-olive">Request received</p>
                 <h2 className="mt-3 font-[family-name:var(--font-serif)] text-3xl font-semibold">
-                  Booking captured (stub)
+                  We cannot wait for this birthday.
                 </h2>
                 <p className="mt-4 text-sm leading-relaxed text-muted">
                   {result.message}
@@ -349,15 +347,14 @@ export function BookingWizard() {
             </p>
           )}
           <div className="mt-6 space-y-2 text-sm">
-            <Row label="Package" value={experience ? formatUsd(packageCents) : "—"} />
+            <Row label="Package" value={experience ? formatUsd(packageCents) : "–"} />
             <Row label="Deposit" value={formatUsd(depositCents)} />
             <div className="hairline my-2" />
             <Row label="Total" value={formatUsd(totalCents)} strong />
           </div>
           <p className="mt-6 text-xs leading-relaxed text-muted">
-            Deposit is refundable after kits are picked up in good condition.
-            Amount is provisional and editable above / via{" "}
-            <code className="text-[11px]">NEXT_PUBLIC_DAMAGE_DEPOSIT_CENTS</code>.
+            The damage deposit covers damage to items. It is refunded after kits
+            are picked up in good condition. Serving {SITE.region}.
           </p>
         </aside>
       </div>

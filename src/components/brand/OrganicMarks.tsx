@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 
-/** Soft botanical corner marks — calm sway, cream/olive atmosphere. */
+/** Soft botanical corner marks: calm sway, cream/olive atmosphere. */
 export function OrganicMarks() {
   const reduce = useReducedMotion();
 

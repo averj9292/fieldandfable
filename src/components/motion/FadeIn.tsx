@@ -9,6 +9,7 @@ type FadeInProps = {
   delay?: number;
   y?: number;
   once?: boolean;
+  id?: string;
 };
 
 export function FadeIn({
@@ -17,15 +18,21 @@ export function FadeIn({
   delay = 0,
   y = 24,
   once = true,
+  id,
 }: FadeInProps) {
   const reduce = useReducedMotion();
 
   if (reduce) {
-    return <div className={className}>{children}</div>;
+    return (
+      <div id={id} className={className}>
+        {children}
+      </div>
+    );
   }
 
   return (
     <motion.div
+      id={id}
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}

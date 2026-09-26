@@ -21,7 +21,7 @@ const sans = Outfit({
 
 export const metadata: Metadata = {
   title: {
-    default: `${SITE.name} — Immersive birthday experiences`,
+    default: `${SITE.name} · Immersive birthday experiences`,
     template: `%s · ${SITE.name}`,
   },
   description: SITE.tagline,
